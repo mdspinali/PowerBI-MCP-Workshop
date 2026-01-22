@@ -1,0 +1,976 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
+  "displayName": "Pop 2 On",
+  "name": "Bookmarkda61bb4a985600484d0a",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "ff684e8bd3052b108d01",
+      "e9ba73df2e50668a6002",
+      "ae79dbeb8e102c2c65e8"
+    ],
+    "suppressActiveSection": true,
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "ReportSection4b3fbaa7dd7908d906d9",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "Filter",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "d",
+                "Entity": "Calendar",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Month"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'Jun'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "Calendar"
+                }
+              },
+              "Property": "Month"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "ReportSection4b3fbaa7dd7908d906d9": {
+        "visualContainers": {
+          "959bd7e9814a46692ddf": {
+            "singleVisual": {
+              "visualType": "qnaVisual",
+              "objects": {
+                "merge": {
+                  "hiddenProperties": [
+                    {
+                      "properties": {
+                        "savedUtterance": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Net Sales vs net sales PM by date as stacked column chart'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "3a28c5fee26bd29ff352": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "de1cc250b6c65bcd1490",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "26045a11651b6e0dbb06",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Design DAX"
+                        }
+                      },
+                      "Property": "Product Sales Top 3"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5c3d2c08b01b1c67bc25",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Design DAX"
+                        }
+                      },
+                      "Property": "Product Sales Other"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "caf451c00bdbebc365c4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0eefc1a7abcee983029e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "96eb08bc8742b007740c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "barChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "c22adfcca77c7baf5f51": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "77f219454c05bb51b061",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "45390be3272155aa7cc3": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "81526d8b8e73d2328644": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "d55aa7aa40745de10d55": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f33131330a0eb89c1032",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c2af2d1276db020286dc",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Store"
+                        }
+                      },
+                      "Property": "Store"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "487316cbeb0aa6c3b1cd",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Design DAX"
+                        }
+                      },
+                      "Property": "Store Sales Other"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a064bb9309b9a036209c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Design DAX"
+                        }
+                      },
+                      "Property": "Store Sales Top 3"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "barChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Store"
+                        }
+                      },
+                      "Property": "Store"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "dec3aad399d5d19a1d11": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "722fc46edb061a34d77a": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "3dfbf089bd73ca82d648": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "0f5634d99d04030c346e": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "449292750b491085de51": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3f77bee9d2c3d3675be4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "bdbdc676ded10ad92c90": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "8ff7d66f352b6d7329e9": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "053f496f142145e05e80": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "7f774b8be13eb0cd5cb1": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "2610a334da02130571e4": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "cc73fe5991209030a4e0": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "080ec6ab314004405d42": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "ace24b3a7e0376084078": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "83b8630b489d7ba59601": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "aae8953dc19c429add3e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "50641fba0342d5b952e6",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "467e73e68e8581b07e3e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "330674726a003904bd5b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "035e36420182d78d0e30": {
+            "singleVisual": {
+              "visualType": "qnaVisual",
+              "objects": {
+                "merge": {
+                  "hiddenProperties": [
+                    {
+                      "properties": {
+                        "savedUtterance": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Net Sales vs net sales PM by date as stacked column chart'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "26af840e20a1e1815648": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "5d14ac0228ea10a55556": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "7a294bf0290b2a762a23": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "319746f1d615d90002d9",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "db66f1b7bad343053056",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d8eac7c14806e9757365",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Store"
+                        }
+                      },
+                      "Property": "Store"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "05cceb7c6899e34eb0da",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Sales"
+                        }
+                      },
+                      "Property": "Amount"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "keyDriversVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                }
+              ],
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "214718d4186003b9790e": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "aefe1f0a481100e0609d": {
+            "singleVisual": {
+              "visualType": "basicShape",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "359adc6f2b69e2075001": {
+            "singleVisual": {
+              "visualType": "basicShape",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "ff684e8bd3052b108d01": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2abd1716122e292a18b6",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "84768ae6237ceb23687e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c6ac39da2d3c3d1e0049",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Store"
+                        }
+                      },
+                      "Property": "Store"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "09ce0904ebb00893a53a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Sales"
+                        }
+                      },
+                      "Property": "Amount"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "keyDriversVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Product"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "e9ba73df2e50668a6002": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "ae79dbeb8e102c2c65e8": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "82f0f62f79d0741d703e": {
+            "singleVisual": {
+              "visualType": "basicShape",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "2b50de60e6ee0542184b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a13c75870bacc0aa3c4d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Store"
+                        }
+                      },
+                      "Property": "Latitude"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "2fc145352cd70b0315d8",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Store"
+                        }
+                      },
+                      "Property": "Longitude"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "807689309390cb337ba2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a14461164cbd7e075c93",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Store"
+                            }
+                          },
+                          "Property": "Store"
+                        }
+                      },
+                      "Function": 3
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "PBI_CV_EB3A4088_75C5_4746_9D8B_255A7B7ECD6C",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Analysis DAX"
+                        }
+                      },
+                      "Property": "Net Sales"
+                    }
+                  }
+                }
+              ],
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
