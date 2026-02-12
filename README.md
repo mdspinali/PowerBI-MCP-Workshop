@@ -42,7 +42,7 @@
 - **Lab 4:** Build Product Performance calculated table
 - **Lab 5:** Add fiscal calendar columns & time intelligence
 - **Lab 6:** Create Calculation Groups (Time & Currency)
-- **Lab 7:** Implement Row-Level Security (static roles)
+- **Lab 7:** Implement Row-Level Security (static roles by store type/product category)
 - **Lab 8:** Create Perspectives & generate documentation
 - **Lab 9:** Git commit, push, and rollback
 
@@ -176,7 +176,7 @@ MCP servers run **locally** on your machine. Your data never leaves your environ
 
 ### ⚠️ IMPORTANT
 - Power BI Desktop must be **running** with a report open
-- Use a **deep-reasoning model** (GPT-5 or Claude Sonnet 4.5) for best results
+- Use an **advanced model** (GPT-5, Claude Sonnet 4.5, or Claude Opus 4.6) for best results
 - We'll be working with **PBIP format** (not PBIX) for better Git integration
 
 ### Today's Sample Report
@@ -203,7 +203,7 @@ Repository: github.com/mdspinali/PowerBI-MCP-Workshop
 
 ---
 
-## Step 1 of 5 — Install the MCP Extension
+## Step 1 of 6 — Install the MCP Extension
 
 ### Instructions:
 
@@ -229,7 +229,59 @@ aka.ms/powerbi-modeling-mcp-vscode
 
 ---
 
-## Step 2 of 5 — Clone the Sample Report
+## Step 2 of 6 — Git Basics for Beginners
+
+> **Already comfortable with Git?** Skip ahead to Step 3.
+
+Git is the version-control system we'll use to save checkpoints of our model throughout the workshop. You don't need to be an expert — just the basics.
+
+### Open a Terminal in VS Code
+
+Press **Ctrl+`** (backtick) or go to **Terminal → New Terminal**.
+
+### Verify Git Is Installed
+
+```bash
+git --version
+# Expected: git version 2.x.x (any recent version is fine)
+```
+
+If Git is not installed, download it from **git-scm.com** and restart VS Code.
+
+### One-Time Setup (if you haven't used Git before)
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+### Key Concepts
+
+| Concept | What It Means |
+|---------|---------------|
+| **Repository (repo)** | A folder tracked by Git — every change is recorded |
+| **Commit** | A saved snapshot you can return to at any time |
+| **Branch** | A parallel line of work — we'll create one to keep the original safe |
+| **Clone** | Download a copy of a remote repository to your machine |
+
+### Commands We'll Use Today
+
+| Command | What It Does |
+|---------|-------------|
+| `git clone <url>` | Download the workshop repo |
+| `git checkout -b <name>` | Create a new branch |
+| `git add .` | Stage all changed files |
+| `git commit -m "message"` | Save a snapshot with a description |
+| `git log --oneline` | View commit history |
+| `git reset --soft HEAD~1` | Undo last commit (keep changes) |
+
+That's everything you need. We'll practice each command as we go.
+
+~5 minutes
+
+---
+
+## Step 3 of 6 — Clone the Sample Report
 
 ### Terminal Commands:
 
@@ -275,7 +327,7 @@ With PBIP, Git shows line-by-line diffs of every model change — measures, tabl
 
 ---
 
-## Step 3 of 5 — Open in Power BI Desktop
+## Step 4 of 6 — Open in Power BI Desktop
 
 ### Steps:
 
@@ -302,7 +354,7 @@ Power BI Desktop (.pbip)
 
 ---
 
-## Step 4 of 5 — Configure Copilot for MCP
+## Step 5 of 6 — Configure Copilot for MCP
 
 ### 1. Open Copilot Chat
 Press `Ctrl+Shift+I` or click the Copilot icon
@@ -316,14 +368,15 @@ Press `Ctrl+Shift+I` or click the Copilot icon
 Use the model selector dropdown:
 - GPT-5 (recommended)
 - Claude Sonnet 4.5 (recommended)
+- Claude Opus 4.6 (recommended)
 
-Deep-reasoning models produce significantly better results for complex modeling tasks.
+Advanced models produce significantly better results for complex modeling tasks.
 
 ~3 minutes
 
 ---
 
-## Step 5 of 5 — Connect MCP to Desktop
+## Step 6 of 6 — Connect MCP to Desktop
 
 ### The Command:
 Type this in Copilot Chat:
@@ -376,17 +429,18 @@ You're now connected to your semantic model via MCP.
 ### Expected Output: Model Overview
 
 ```
-Tables: 7
-• Sales (fact table)
-• Returns (fact table)
-• Product (dimension)
-• Store (dimension)
-• Calendar (dimension)
-• Region (dimension)
-• Measures Table
+Tables: 18+
+• Sales (fact table — Amount, Unit, Status, Date, ProductID, StoreID)
+• Product (dimension — Category, Segment, Price Range)
+• Store (dimension — Type: External/Internal)
+• Calendar (dimension — Date, Month, Week)
+• Customer (dimension)
+• Analysis DAX, Design DAX (measure containers)
+• Tooltip Info, and more...
 
-Measures: 15+
-Total Revenue, Total Cost, Gross Profit, Return Rate...
+Measures: 58+
+Net Sales, Returns, Units Sold, Units Returned, Return Rate,
+Net Sales Variance %, All Returns, % of All Returns...
 ```
 
 **If you see your model structure, you're ready!**
@@ -419,7 +473,7 @@ Not working? Check:
 | LAB 4 | Product Performance | Calculated table with performance analysis |
 | LAB 5 | Fiscal Calendar | 6 new columns + time intelligence |
 | LAB 6 | Calc Groups | Time Comparison + Currency groups |
-| LAB 7 | RLS | Static security roles by type/category |
+| LAB 7 | RLS | Static security roles by store type / product category |
 | LAB 8 | Perspectives | 3 views + full documentation |
 | LAB 9 | Git Rollback | Version control safety net |
 
@@ -456,16 +510,16 @@ Your model uses inconsistent naming: some columns are CamelCase, others have und
 
 ### Before → After Example:
 
-| Before | After |
-|--------|-------|
-| product_category | Product Category |
-| ProductName | Product Name |
-| store_id | Store ID |
-| Revenue | Total Revenue |
-| totalCost | Total Cost |
+| Before (actual model) | After | Table | Issue |
+|------------------------|-------|-------|-------|
+| `Segement Color` | `Segment Color` | Product | Typo |
+| `image` | `Image` | Store | Inconsistent casing |
+| `ProductID` | `Product ID` | Sales | CamelCase → spaces |
+| `StoreID` | `Store ID` | Sales / Store | CamelCase → spaces |
+| `nombre` | `Name` | Tooltip Info | Spanish remnant |
 
 ### Git Checkpoint:
-After completing the renames, save your .pbix and run:
+After completing the renames, save in Power BI Desktop (Ctrl+S) and run:
 ```bash
 git add . && git commit -m "Lab 1: Applied consistent naming"
 ```
@@ -500,14 +554,14 @@ Your model has zero documentation. Report consumers don't know what measures mea
 
 ### Example Output:
 
-**Measure: Total Revenue**
-> *"Calculates the sum of all sales revenue. Use this measure for high-level revenue reporting across any dimension."*
+**Measure: Net Sales**
+> *"Calculates the total dollar amount of sold items: `CALCULATE(SUM(Sales[Amount]), Sales[Status]="Sold")`. Excludes returned items."*
 
 **Measure: Return Rate**
 > *"Calculates the percentage of units returned versus units sold. Values above 5% may indicate product quality issues."*
 
 **Column: Product[Category]**
-> *"The high-level product grouping (e.g., Electronics, Clothing). Use for top-level product analysis."*
+> *"The high-level product grouping (Office 365, Power Platform, XBOX). Use for top-level product analysis."*
 
 ### Git Checkpoint:
 ```bash
@@ -532,7 +586,7 @@ Your model lacks organized KPIs. Create a dedicated measures table with a full s
 
 ```
 "Create these measures in the KPI Measures table:
-- Gross Margin % = DIVIDE([Net Sales] - [Returns], [Net Sales])
+- Sales Retention Rate = DIVIDE([Net Sales] - [Returns], [Net Sales])
 - Average Transaction Value = DIVIDE([Net Sales], DISTINCTCOUNT(Sales[ID]))
 - Total Units per Transaction = DIVIDE([Units Sold], DISTINCTCOUNT(Sales[ID]))
 - Days Since Last Sale = DATEDIFF(MAX(Sales[Date]), TODAY(), DAY)"
@@ -550,7 +604,7 @@ Your model lacks organized KPIs. Create a dedicated measures table with a full s
 
 | Measure | DAX Pattern | Complexity |
 |---------|-------------|------------|
-| Gross Margin % | DIVIDE with subtraction | Basic |
+| Sales Retention Rate | DIVIDE with subtraction | Basic |
 | Average Transaction Value | DIVIDE + DISTINCTCOUNT | Intermediate |
 | Total Units per Transaction | DIVIDE + DISTINCTCOUNT | Basic |
 | Days Since Last Sale | DATEDIFF + MAX | Basic |
@@ -576,10 +630,10 @@ git add . && git commit -m "Lab 3: Created KPI Measures table with 7 new measure
 
 ---
 
-## Lab 4 — Build a Customer Segmentation Table
+## Lab 4 — Build a Product Performance Table
 
 ### Scenario:
-Marketing wants to analyze customers by segment. Create a calculated table that segments customers based on purchase behavior (RFM analysis).
+Management wants to understand which products drive revenue and which have high return rates. Create a calculated table that summarizes product performance and segments products accordingly.
 
 ### Prompts to Try:
 
@@ -595,23 +649,21 @@ Marketing wants to analyze customers by segment. Create a calculated table that 
 "Add a calculated column 'ProfitabilityRank' that ranks products by (TotalSales - TotalReturns)"
 ```
 
-```
-"Create a relationship between Product Performance and the Sales table on ProductID"
-```
-
 ### Expected Table Structure:
 
 ```
-Customer Segments (Calculated Table)
-├── CustomerID (key)
-├── TotalSpend (currency)
-├── OrderCount (integer)
-├── LastOrderDate (date)
-├── DaysSinceLastOrder (integer)
-├── ValueSegment (text: High/Medium/Low)
-├── EngagementLevel (text: Active/At Risk/Churned)
-└── RFMScore (integer: 1-5)
+Product Performance (Calculated Table)
+├── ProductID (key)
+├── Product (text)
+├── Category (text — Office 365, Power Platform, XBOX)
+├── TotalSales (currency)
+├── TotalReturns (currency)
+├── UnitsSold (integer)
+├── ReturnRate (percentage)
+└── PerformanceSegment (text: High Performer / Average / Underperformer)
 ```
+
+> **Note:** A Sales → Product relationship already exists via ProductID. Do not create a second relationship — it would cause ambiguity.
 
 ### DAX for Calculated Table:
 ```dax
@@ -631,6 +683,8 @@ ADDCOLUMNS(
 )
 ```
 
+> **Production tip:** `SUMMARIZECOLUMNS` is generally preferred over `ADDCOLUMNS(SUMMARIZE(...))` for better performance. The AI may use either pattern — both work correctly here.
+
 ### Create Supporting Measures:
 ```
 "Create measures: High Performer Count, Underperformer Count, Average Sales by Performance Segment"
@@ -638,11 +692,11 @@ ADDCOLUMNS(
 
 ### Git Checkpoint:
 ```bash
-git add . && git commit -m "Lab 4: Built Customer Segmentation calculated table with relationships"
+git add . && git commit -m "Lab 4: Built Product Performance calculated table"
 ```
 
-~15 minutes  
-**Tools Used:** table_operations, column_operations, relationship_operations, measure_operations
+~15 minutes
+**Tools Used:** table_operations, column_operations, measure_operations
 
 ---
 
@@ -663,18 +717,18 @@ The model has a basic calendar but lacks fiscal year support and advanced date i
 
 ```
 "Create these time intelligence measures:
-- Revenue YTD (fiscal year)
-- Revenue QTD (fiscal quarter)  
-- Revenue Same Period Last Fiscal Year
+- Net Sales YTD (fiscal year)
+- Net Sales QTD (fiscal quarter)
+- Net Sales Same Period Last Fiscal Year
 - Fiscal YoY Growth %"
 ```
 
 ```
-"Create a measure 'Rolling 12 Month Revenue' using DATESINPERIOD"
+"Create a measure 'Rolling 12M Net Sales' using DATESINPERIOD"
 ```
 
 ```
-"Create a measure 'Revenue Moving Annual Total' (MAT)"
+"Create a measure 'Net Sales Moving Annual Total' (MAT)"
 ```
 
 ### New Calendar Columns:
@@ -691,18 +745,18 @@ The model has a basic calendar but lacks fiscal year support and advanced date i
 ### Time Intelligence Measures:
 
 ```dax
-Revenue Fiscal YTD = 
-TOTALYTD([Total Revenue], 'Calendar'[Date], "6/30")
+Net Sales Fiscal YTD =
+TOTALYTD([Net Sales], 'Calendar'[Date], "6/30")
 
-Revenue Same Period LFY = 
+Net Sales Same Period LFY =
 CALCULATE(
-    [Total Revenue],
+    [Net Sales],
     DATEADD('Calendar'[Date], -1, YEAR)
 )
 
-Rolling 12M Revenue = 
+Rolling 12M Net Sales =
 CALCULATE(
-    [Total Revenue],
+    [Net Sales],
     DATESINPERIOD('Calendar'[Date], MAX('Calendar'[Date]), -12, MONTH)
 )
 ```
@@ -753,16 +807,43 @@ Time Comparison (Calculation Group)
    ├── Actual           → SELECTEDMEASURE()
    ├── Prior Year       → CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Calendar'[Date]))
    ├── YoY Change       → SELECTEDMEASURE() - CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR(...))
-   ├── YoY %            → DIVIDE([YoY Change], [Prior Year])
+   ├── YoY %            → (see DAX below — must be self-contained)
    ├── Prior Period     → CALCULATE(SELECTEDMEASURE(), PREVIOUSMONTH('Calendar'[Date]))
-   ├── PoP %            → DIVIDE(SELECTEDMEASURE() - [Prior Period], [Prior Period])
+   ├── PoP %            → (see DAX below — must be self-contained)
    ├── YTD              → TOTALYTD(SELECTEDMEASURE(), 'Calendar'[Date])
-   └── Rolling 3M Avg   → AVERAGEX(DATESINPERIOD(...), SELECTEDMEASURE())
+   └── Rolling 3M Avg   → (see DAX below)
 
 Currency (Calculation Group)
    ├── USD              → SELECTEDMEASURE()
    ├── EUR              → SELECTEDMEASURE() * 0.92
    └── GBP              → SELECTEDMEASURE() * 0.79
+```
+
+> **Important:** Calculation items cannot reference other calculation items by name. Each must be self-contained.
+
+**YoY % (self-contained):**
+```dax
+VAR _Current = SELECTEDMEASURE()
+VAR _PY = CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Calendar'[Date]))
+RETURN DIVIDE(_Current - _PY, _PY)
+```
+
+**PoP % (self-contained):**
+```dax
+VAR _Current = SELECTEDMEASURE()
+VAR _PM = CALCULATE(SELECTEDMEASURE(), PREVIOUSMONTH('Calendar'[Date]))
+RETURN DIVIDE(_Current - _PM, _PM)
+```
+
+**Rolling 3M Avg (needs CALCULATE inside iteration):**
+```dax
+CALCULATE(
+    AVERAGEX(
+        DATESINPERIOD('Calendar'[Date], MAX('Calendar'[Date]), -3, MONTH),
+        CALCULATE(SELECTEDMEASURE())
+    ),
+    REMOVEFILTERS('Calendar')
+)
 ```
 
 ### Why This is Powerful:
@@ -780,23 +861,23 @@ git add . && git commit -m "Lab 6: Created Time Comparison and Currency calculat
 
 ---
 
-## Lab 7 — Implement Row-Level Security
+## Lab 7 — Implement Row-Level Security (Static Roles)
 
 ### Scenario:
-The organization needs to restrict data. Regional managers see only their region. Sales reps see only their accounts. Implement dynamic RLS.
+The organization needs to restrict data by store type and product category. Create static security roles using actual values in the model: `Store[Type]` (External / Internal) and `Product[Category]` (Office 365 / Power Platform / XBOX).
 
 ### Prompts to Try:
 
 ```
-"Create a security role called 'Regional Manager' that filters the Store table where Region = 'North America'"
+"Create a security role called 'Internal Stores' that filters Store where Type = 'Internal'"
 ```
 
 ```
-"Create security roles for each distinct region in the model"
+"Create a security role called 'External Stores' that filters Store where Type = 'External'"
 ```
 
 ```
-"Create a dynamic RLS role called 'Sales Rep' that filters Sales where SalesRepEmail = USERPRINCIPALNAME()"
+"Create a security role called 'XBOX Only' that filters Product where Category = 'XBOX'"
 ```
 
 ```
@@ -812,33 +893,29 @@ The organization needs to restrict data. Regional managers see only their region
 ```
 Security Roles
    │
-   ├── Regional Manager - North America
-   │   └── Store[Region] = "North America"
+   ├── Internal Stores
+   │   └── Store[Type] = "Internal"
    │
-   ├── Regional Manager - Europe  
-   │   └── Store[Region] = "Europe"
+   ├── External Stores
+   │   └── Store[Type] = "External"
    │
-   ├── Regional Manager - Asia Pacific
-   │   └── Store[Region] = "Asia Pacific"
-   │
-   ├── Sales Rep (Dynamic)
-   │   └── Sales[SalesRepEmail] = USERPRINCIPALNAME()
+   ├── XBOX Only
+   │   └── Product[Category] = "XBOX"
    │
    └── Executive
-       └── (No filters)
+       └── (No filters — full access)
 ```
 
-### Dynamic RLS Pattern:
+### Static RLS Filter Expressions:
 ```dax
-// Filter expression for Sales Rep role on Sales table:
-[SalesRepEmail] = USERPRINCIPALNAME()
+// Internal Stores role — filter on Store table:
+[Type] = "Internal"
 
-// Or with a lookup table:
-CONTAINS(
-    FILTER(UserMapping, UserMapping[Email] = USERPRINCIPALNAME()),
-    UserMapping[Region], Store[Region]
-)
+// XBOX Only role — filter on Product table:
+[Category] = "XBOX"
 ```
+
+> **Note:** Dynamic RLS (using `USERPRINCIPALNAME()`) requires a user-mapping table, which this model does not include. The static roles above are a great starting point — dynamic RLS can be added later when a mapping table is available.
 
 ### Test the Roles:
 After creating, test in Power BI Desktop:
@@ -846,10 +923,10 @@ After creating, test in Power BI Desktop:
 
 ### Git Checkpoint:
 ```bash
-git add . && git commit -m "Lab 7: Implemented static and dynamic RLS"
+git add . && git commit -m "Lab 7: Implemented static RLS roles"
 ```
 
-~10 minutes  
+~10 minutes
 **Tools Used:** security_role_operations
 
 ---
@@ -899,15 +976,15 @@ Different users need different views. Create perspectives for Sales, Finance, an
 # Sales & Returns Semantic Model
 
 ## Model Statistics
-- Tables: 9 (7 original + 2 created)
-- Measures: 25+ 
-- Relationships: 12
-- Security Roles: 5
+- Tables: 19 (18 original + 1 created in Lab 4)
+- Measures: 65+
+- Relationships: 9
+- Security Roles: 4
 - Calculation Groups: 2
 
 ## New Objects Created in Workshop
 - KPI Measures table (7 measures)
-- Customer Segments calculated table
+- Product Performance calculated table
 - Calendar fiscal columns (6 columns)
 - Time Comparison calc group (8 items)
 - Currency calc group (3 items)
@@ -926,6 +1003,8 @@ git add . && git commit -m "Lab 8: Created perspectives and documentation"
 
 ## Lab 9 — Git Workflow & Rollback
 
+> **Quick demo** — This is an instructor-led walkthrough rather than a hands-on exercise. Follow along as we explore Git's safety net.
+
 ### Scenario:
 The AI made a mistake! A bulk rename broke some DAX references. Use Git to review changes and rollback if needed.
 
@@ -936,12 +1015,15 @@ The AI made a mistake! A bulk rename broke some DAX references. Use Git to revie
 git log --oneline
 
 # Output:
-# a1b2c3d Lab 5: Generated model documentation
-# e4f5g6h Lab 4: Implemented regional RLS
-# i7j8k9l Lab 3: Created Time Intelligence calculation group
-# m0n1o2p Lab 2: Added descriptions to all objects
-# q3r4s5t Lab 1: Applied consistent naming
-# u6v7w8x Initial commit
+# f8e7d6c Lab 8: Created perspectives and documentation
+# a1b2c3d Lab 7: Implemented static RLS roles
+# e4f5g6h Lab 6: Created Time Comparison and Currency calculation groups
+# i7j8k9l Lab 5: Extended calendar with fiscal year and time intelligence
+# m0n1o2p Lab 4: Built Product Performance calculated table
+# q3r4s5t Lab 3: Created KPI Measures table with 7 new measures
+# u6v7w8x Lab 2: Added descriptions to all objects
+# y9z0a1b Lab 1: Applied consistent naming
+# c2d3e4f Initial commit
 ```
 
 ### Rollback Options:
@@ -956,10 +1038,11 @@ git reset --soft HEAD~1
 git reset --hard HEAD~1
 ```
 
-**Option 3: Rollback to specific commit**
+**Option 3: Rollback to a specific commit (restore entire PBIP folder)**
 ```bash
-git checkout q3r4s5t -- "Sales & Returns Sample v201912.pbix"
+git checkout y9z0a1b -- .
 ```
+> PBIP is a folder structure, not a single binary file — use `. ` to restore all project files from that commit.
 
 **Option 4: Create a new commit that undoes changes**
 ```bash
@@ -970,7 +1053,7 @@ git revert HEAD
 
 ```
 1. Make MCP changes
-2. Save .pbix in Power BI Desktop (Ctrl+S)
+2. Save in Power BI Desktop (Ctrl+S)
 3. Test changes work correctly
 4. git add . && git commit -m "Description"
 5. If something breaks → git reset or git revert
@@ -994,7 +1077,7 @@ Commit frequently! Small commits = easier rollbacks.
 
 **DAX Query Benchmarking**
 ```
-"Execute this DAX query and return the performance metrics: EVALUATE SUMMARIZE(Sales, Product[Category], 'Total Revenue')"
+"Execute this DAX query and return the performance metrics: EVALUATE SUMMARIZECOLUMNS(Product[Category], \"Net Sales\", [Net Sales], \"Units Sold\", [Units Sold])"
 ```
 
 **Refactor to Parameters**
@@ -1150,13 +1233,13 @@ Commit frequently! Small commits = easier rollbacks.
 
 - **KPI Measures Table** — 7 new measures with complex DAX patterns
 
-- **Customer Segments** — Calculated table with RFM analysis
+- **Product Performance** — Calculated table with performance analysis
 
 - **Fiscal Calendar** — 6 new columns + time intelligence measures
 
 - **Calculation Groups** — Time Comparison (8 items) + Currency (3 items)
 
-- **Row-Level Security** — Static regional + dynamic user-based roles
+- **Row-Level Security** — Static roles by store type and product category
 
 - **Perspectives** — Sales, Finance, Executive views
 
@@ -1177,7 +1260,7 @@ Commit frequently! Small commits = easier rollbacks.
 - Backup before experimenting
 - Commit often
 - Start with read-only exploration
-- Use deep-reasoning models for best results
+- Use advanced models for best results
 
 **Share with your team:**
 github.com/microsoft/powerbi-modeling-mcp

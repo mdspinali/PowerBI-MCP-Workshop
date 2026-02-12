@@ -108,7 +108,7 @@
             "accessToken": {
               "expr": {
                 "Literal": {
-                  "Value": "'pk.eyJ1IjoibWlndWVsbXllcnMiLCJhIjoiY2pua3N6djRmMDBidTNxcHZyc29xNTdoNCJ9.JLYYaLBkDGvDfCZKXHbfaQ'"
+                  "Value": "'MAPBOX_TOKEN_REMOVED'"
                 }
               }
             },
