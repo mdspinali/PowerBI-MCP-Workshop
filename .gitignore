@@ -1,3 +1,5 @@
+reports/
+*.pbix
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
 .env

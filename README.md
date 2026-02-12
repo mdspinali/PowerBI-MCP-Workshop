@@ -4,7 +4,7 @@
 **Duration:** 2 Hours (Hands-On Lab Format)  
 **Audience:** Power BI Developers familiar with semantic models, new to MCP  
 **Tools:** VS Code + GitHub Copilot + Power BI Desktop  
-**Sample Report:** Sales & Returns Sample v201912.pbix
+**Sample Report:** [Sales & Returns Sample v201912.pbix](https://github.com/microsoft/powerbi-desktop-samples/blob/main/Sample%20Reports/Sales%20%26%20Returns%20Sample%20v201912.pbix) (download from Microsoft)
 
 ---
 
@@ -30,7 +30,8 @@
 - Power BI Modeling MCP architecture
 - Install VS Code extension
 - Configure GitHub Copilot
-- Clone sample report from Git
+- Download sample report & save as PBIP
+- Set up two-folder workspace
 - Connect MCP to Power BI Desktop
 
 **Goal:** Everyone connected and making their first MCP call
@@ -45,6 +46,7 @@
 - **Lab 7:** Implement Row-Level Security (static roles by store type/product category)
 - **Lab 8:** Create Perspectives & generate documentation
 - **Lab 9:** Git commit, push, and rollback
+- **Lab 10:** Fix report visual references (separate VS Code window)
 
 **Goal:** Complete real-world model changes with CI/CD safety net
 
@@ -180,7 +182,7 @@ MCP servers run **locally** on your machine. Your data never leaves your environ
 - We'll be working with **PBIP format** (not PBIX) for better Git integration
 
 ### Today's Sample Report
-**Sales & Returns Sample v201912 (PBIP format)**
+**Sales & Returns Sample v201912**
 
 Rich semantic model with:
 - 18 tables
@@ -188,7 +190,9 @@ Rich semantic model with:
 - 9 relationships
 - Time intelligence patterns
 
-Repository: github.com/mdspinali/PowerBI-MCP-Workshop
+**Download:**
+- GitHub: [Sales & Returns Sample v201912.pbix](https://github.com/microsoft/powerbi-desktop-samples/blob/main/Sample%20Reports/Sales%20%26%20Returns%20Sample%20v201912.pbix)
+- Direct: [https://go.microsoft.com/fwlink/?linkid=2113239](https://go.microsoft.com/fwlink/?linkid=2113239)
 
 ---
 
@@ -262,13 +266,11 @@ git config --global user.email "your.email@example.com"
 | **Repository (repo)** | A folder tracked by Git — every change is recorded |
 | **Commit** | A saved snapshot you can return to at any time |
 | **Branch** | A parallel line of work — we'll create one to keep the original safe |
-| **Clone** | Download a copy of a remote repository to your machine |
-
 ### Commands We'll Use Today
 
 | Command | What It Does |
 |---------|-------------|
-| `git clone <url>` | Download the workshop repo |
+| `git init` | Initialize a new repo in your model folder |
 | `git checkout -b <name>` | Create a new branch |
 | `git add .` | Stage all changed files |
 | `git commit -m "message"` | Save a snapshot with a description |
@@ -281,31 +283,17 @@ That's everything you need. We'll practice each command as we go.
 
 ---
 
-## Step 3 of 6 — Clone the Sample Report
+## Step 3 of 6 — Download & Convert to PBIP
 
-### Terminal Commands:
+### a) Download the PBIX
 
-```bash
-# Clone the workshop repository with PBIP format
-git clone https://github.com/mdspinali/PowerBI-MCP-Workshop.git
+Download the sample report from Microsoft:
+- GitHub: [Sales & Returns Sample v201912.pbix](https://github.com/microsoft/powerbi-desktop-samples/blob/main/Sample%20Reports/Sales%20%26%20Returns%20Sample%20v201912.pbix)
+- Direct: [https://go.microsoft.com/fwlink/?linkid=2113239](https://go.microsoft.com/fwlink/?linkid=2113239)
 
-# Navigate to the workshop folder
-cd PowerBI-MCP-Workshop
+Save the `.pbix` file to your Downloads folder.
 
-# Create a working branch for our changes
-git checkout -b my-workshop-changes
-```
-
-### What You'll Find:
-**Power BI Project (.pbip)** — Text-based format optimized for version control
-
-This sample includes:
-- 18 tables (Sales, Product, Store, Calendar, etc.)
-- 58 measures
-- 9 relationships
-- Time intelligence patterns
-
-### Why PBIP Instead of PBIX?
+### b) Why PBIP Instead of PBIX?
 
 | Format | Best For | Git Friendly? |
 |--------|----------|---------------|
@@ -320,10 +308,46 @@ This sample includes:
 
 **Today's Workshop:** We'll use PBIP exclusively to take advantage of Git's full power.
 
-### Note:
-With PBIP, Git shows line-by-line diffs of every model change — measures, tables, relationships, all in readable TMDL format!
+### c) Save as PBIP
 
-~3 minutes
+1. **Open** the downloaded `.pbix` in Power BI Desktop
+2. **File → Save a copy** → select **Power BI Project (.pbip)** as the file type
+3. **Save** to a dedicated folder, e.g. `C:\PowerBI-Workshop-Model\`
+4. **Close** the `.pbix`, then **reopen** from the new `.pbip` file in your model folder
+
+### d) Initialize Git in the PBIP Folder
+
+Open a terminal in your PBIP folder and run:
+
+```bash
+cd "C:\PowerBI-Workshop-Model"
+git init
+git add .
+git commit -m "Initial commit"
+git checkout -b my-workshop-changes
+```
+
+### e) Two-Folder Workspace Setup
+
+```
+Folder A: VS Code workspace
+├── This is where you chat with Copilot
+├── Does NOT contain PBIP files
+└── Agent can only use MCP tools (no file-editing shortcuts)
+
+Folder B: PBIP model folder  (C:\PowerBI-Workshop-Model)
+├── Opened in Power BI Desktop
+├── Has its own git repo
+└── Agent cannot see these files (by design)
+```
+
+**Why keep them separate?** If the agent can see your TMDL files, it may edit them directly instead of using MCP tools. We keep them separate so every model change goes through MCP — that's what we're here to learn.
+
+- **VS Code:** Open any folder that is **not** the PBIP folder (can be an empty folder, or clone this workshop repo for reference materials)
+- **Power BI Desktop:** Opens from the `.pbip` file in Folder B
+- In **Lab 10**, we'll intentionally open the PBIP folder in a second VS Code window for report-layer fixes
+
+~5 minutes
 
 ---
 
@@ -332,8 +356,8 @@ With PBIP, Git shows line-by-line diffs of every model change — measures, tabl
 ### Steps:
 
 1. **Open the .pbip file**
-   - Navigate to the cloned repository folder
-   - Double-click `Sales & Returns Sample v201912 (1).pbip`
+   - Navigate to your PBIP folder (e.g. `C:\PowerBI-Workshop-Model\`)
+   - Double-click the `.pbip` file
    - Power BI Desktop will launch automatically
 
 2. **Wait for the report to fully load**
@@ -476,6 +500,7 @@ Not working? Check:
 | LAB 7 | RLS | Static security roles by store type / product category |
 | LAB 8 | Perspectives | 3 views + full documentation |
 | LAB 9 | Git Rollback | Version control safety net |
+| LAB 10 | Report Cleanup | Fix broken visual references (second VS Code window) |
 
 ~60+ minutes
 
@@ -520,11 +545,14 @@ Your model uses inconsistent naming: some columns are CamelCase, others have und
 
 ### Git Checkpoint:
 After completing the renames, save in Power BI Desktop (Ctrl+S) and run:
+
+> Run these commands in a terminal opened in your **PBIP folder** (Folder B), not the VS Code workspace.
+
 ```bash
 git add . && git commit -m "Lab 1: Applied consistent naming"
 ```
 
-~10 minutes  
+~10 minutes
 **Tools Used:** batch_column_operations, batch_measure_operations
 
 ---
@@ -564,11 +592,14 @@ Your model has zero documentation. Report consumers don't know what measures mea
 > *"The high-level product grouping (Office 365, Power Platform, XBOX). Use for top-level product analysis."*
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 2: Added descriptions to all objects"
 ```
 
-~10 minutes  
+~10 minutes
 **Tools Used:** batch_measure_operations, batch_column_operations, table_operations
 
 ---
@@ -621,11 +652,14 @@ RETURN DIVIDE(CurrentMonth - PriorMonth, PriorMonth)
 ```
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 3: Created KPI Measures table with 7 new measures"
 ```
 
-~15 minutes  
+~15 minutes
 **Tools Used:** table_operations, measure_operations
 
 ---
@@ -691,6 +725,9 @@ ADDCOLUMNS(
 ```
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 4: Built Product Performance calculated table"
 ```
@@ -762,11 +799,14 @@ CALCULATE(
 ```
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 5: Extended calendar with fiscal year and time intelligence"
 ```
 
-~15 minutes  
+~15 minutes
 **Tools Used:** column_operations, measure_operations, calendar_operations
 
 ---
@@ -852,11 +892,14 @@ CALCULATE(
 - Users select time comparison from slicer, applies to ALL measures instantly
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 6: Created Time Comparison and Currency calculation groups"
 ```
 
-~15 minutes  
+~15 minutes
 **Tools Used:** calculation_group_operations
 
 ---
@@ -922,6 +965,9 @@ After creating, test in Power BI Desktop:
 - Modeling → View as Roles → Select role to test
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 7: Implemented static RLS roles"
 ```
@@ -992,11 +1038,14 @@ Different users need different views. Create perspectives for Sales, Finance, an
 ```
 
 ### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
 ```bash
 git add . && git commit -m "Lab 8: Created perspectives and documentation"
 ```
 
-~10 minutes  
+~10 minutes
 **Tools Used:** perspective_operations, batch_perspective_operations, model_operations
 
 ---
@@ -1009,6 +1058,8 @@ git add . && git commit -m "Lab 8: Created perspectives and documentation"
 The AI made a mistake! A bulk rename broke some DAX references. Use Git to review changes and rollback if needed.
 
 ### View Changes Made:
+
+> Run in your **PBIP folder** terminal (Folder B).
 
 ```bash
 # See all commits from workshop
@@ -1024,6 +1075,7 @@ git log --oneline
 # u6v7w8x Lab 2: Added descriptions to all objects
 # y9z0a1b Lab 1: Applied consistent naming
 # c2d3e4f Initial commit
+# (Lab 10 commit comes after this)
 ```
 
 ### Rollback Options:
@@ -1063,6 +1115,47 @@ git revert HEAD
 Commit frequently! Small commits = easier rollbacks.
 
 ~5 minutes
+
+---
+
+## Lab 10 — Fix Report Visual References
+
+### Scenario:
+Lab 1 renamed columns and measures in the semantic model via MCP, but the report visuals still reference the old names. The report layer is stored as JSON in the PBIP folder — MCP can't modify it, but the agent can edit the files directly.
+
+### Why a Second VS Code Window?
+We kept the PBIP folder out of our main workspace so the agent would use MCP tools for model changes (Labs 1-9). Now we intentionally open it for report-layer fixes.
+
+### Steps:
+1. **Open a new VS Code window** (File → New Window)
+2. **Open your PBIP folder:** File → Open Folder → `C:\PowerBI-Workshop-Model\`
+3. Open Copilot Chat in this new window
+
+### Prompts to Try:
+
+```
+"Scan all report visual JSON files for references to the old column names
+from Lab 1 (ProductID, StoreID, Segement Color, image, nombre) and update
+them to the new names (Product ID, Store ID, Segment Color, Image, Name)"
+```
+
+```
+"Find all broken field references in the report definition folder and fix them"
+```
+
+### What Happens:
+The agent searches through the `.Report/definition/` folder, finds visual JSON files with old column references, and updates them. This is direct file editing — the same way a developer would do a find-and-replace, but AI-assisted.
+
+### Git Checkpoint:
+
+> Run in your **PBIP folder** terminal (Folder B).
+
+```bash
+git add . && git commit -m "Lab 10: Fixed report visual references after rename"
+```
+
+~5 minutes
+**Tools Used:** Direct file editing (not MCP — report layer is outside MCP scope)
 
 ---
 
@@ -1198,15 +1291,11 @@ Commit frequently! Small commits = easier rollbacks.
    - Start with non-production models
    - Build confidence with read-only operations first
 
-2. **Explore PBIP integration**
-   - MCP supports Power BI Project files (TMDL)
-   - Better Git diffs with text-based format
-
-3. **Connect to Fabric workspaces**
+2. **Connect to Fabric workspaces**
    - Same MCP, different connection command
    - `Connect to semantic model '[Name]' in Fabric Workspace '[Workspace]'`
 
-4. **Build custom workflows**
+3. **Build custom workflows**
    - Combine MCP with other tools
    - Automate repetitive modeling tasks
 
@@ -1227,7 +1316,7 @@ Commit frequently! Small commits = easier rollbacks.
 
 - **25+ Tools** — From single operations to bulk batch processing
 
-- **Setup** — Extension install, Git clone, Copilot config, connection
+- **Setup** — Extension install, PBIX download, PBIP conversion, Copilot config, connection
 
 ### What You Built:
 
@@ -1246,6 +1335,8 @@ Commit frequently! Small commits = easier rollbacks.
 - **Documentation** — Auto-generated model documentation
 
 - **Safety Net** — Git commits for easy rollback when AI makes mistakes
+
+- **Report Cleanup** — Fixed broken visual references using direct file editing in a second VS Code window
 
 ### Key Takeaway:
 > MCP transforms hours of repetitive modeling work into seconds of natural language conversation — with version control as your safety net.
